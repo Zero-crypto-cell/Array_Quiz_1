@@ -24,9 +24,15 @@ bool Array::Add(int value) {
 
 // Insert value at specified index, shifting elements to the right
 bool Array::InsertAt(int index, int value) {
+    // reject invalid index
     if (index < 0 || index > size_) {
-        return false;  // invalid index
+        return false;
     }
+    // must have room for a new element
+    if (size_ == capacity_) {
+        return false;  // no space to insert
+    }
+    // shift existing elements to make room
     for (int i = size_; i > index; i--) {
         data_[i] = data_[i - 1];
     }
